@@ -22,23 +22,74 @@ public class sFrame extends JFrame {
 			   x3 = 50;
 	
 	// 버튼
-	JButton bRecord;	// 기록 보기
-	JButton start;		// 게임 시작
-	JButton bCash;		// 현재금액 조회
+	private JButton bRecord;	// 기록 보기
+	private JButton start;		// 게임 시작
+	private JButton bCash;		// 현재금액 조회
+	
+	private JButton uhm;
+	private JButton joon;
+	private JButton sik;
+	
+	// 배경
+	JLabel bg = new JLabel(new ImageIcon("field.png"));
 	
 	// 현재금액
 	JLabel currentCash = new JLabel("현재금액"); 
 	JTextField fCash = new JTextField(10);
 	
-	// 버튼 생성 후 배치
+	public void backGroung() {
+//		bg.setBounds(0, 40, 600, 200);
+//		add(bg);
+	}
+	
+	
+	// 버튼 생성 & 배치
+	public void bSet() {
+		//setLayout(null);	// 절대위치 사용
+
+		bRecord = new JButton("기록");
+		add(bRecord);
+		
+		start = new JButton("게임 시작");
+		add(start);
+		
+		bCash = new JButton("캐쉬 조회");
+		add(bCash);
+		
+		uhm = new JButton("엄");
+		add(uhm);
+		joon = new JButton("준");
+		add(joon);
+		sik = new JButton("식");
+		add(sik);
+		
+		// 버튼 위치 지정
+		int x = 50;
+		int y = 200;
+		bRecord.setBounds(x, y, 100, 50);	// 기록 배치
+		bCash.setBounds(x*4, y, 120, 50);	// 캐쉬 배치
+		start.setBounds(x*8, y, 100, 50);	// 시작 배치
+		
+		
+		uhm.setBounds(x, y+60, 50, 50);
+		joon.setBounds(x, y+115, 50, 50);
+		sik.setBounds(x, y+170, 50, 50);
+		
+		
+	}
+	
 	
 	// DB연결
+	
+	
 	
 	
 	// 달팽이 게임
 	public sFrame() {
 		setTitle("SnailRace");
-		setSize(1000, 500);
+		setSize(900, 500);
+		
+		bSet();	// 버튼 배치
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setLayout(null);	// 절대 위치를 사용
