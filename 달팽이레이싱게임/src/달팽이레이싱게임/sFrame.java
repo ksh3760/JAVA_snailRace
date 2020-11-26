@@ -1,5 +1,7 @@
 package 달팽이레이싱게임;
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -12,10 +14,12 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 public class sFrame extends JFrame {
+	
 	// 달팽이 레이블
 	static JLabel label1;	
 	static JLabel label2;
 	static JLabel label3;
+	
 	// 달팽이 x좌표
 	static int x1 = 50, 
 			   x2 = 50, 
@@ -30,31 +34,28 @@ public class sFrame extends JFrame {
 	private JButton joon;
 	private JButton sik;
 	
+	boolean startFlag = false;	// 스레드 시작
+
 	// 배경
-	JLabel bg = new JLabel(new ImageIcon("field.png"));
-	
-	// 현재금액
-	JLabel currentCash = new JLabel("현재금액"); 
-	JTextField fCash = new JTextField(10);
-	
-	public void backGroung() {
-//		bg.setBounds(0, 40, 600, 200);
+//	JLabel bg = new JLabel(new ImageIcon("field.png"));
+//	public void backGroung() {
+//		bg.setBounds(0, 10, 600, 200);
 //		add(bg);
-	}
-	
+//	}
+		
 	
 	// 버튼 생성 & 배치
 	public void bSet() {
 		//setLayout(null);	// 절대위치 사용
-
-		bRecord = new JButton("기록");
-		add(bRecord);
 		
-		start = new JButton("게임 시작");
+		start = new JButton("시작");
 		add(start);
 		
 		bCash = new JButton("캐쉬 조회");
 		add(bCash);
+		
+		bRecord = new JButton("기록");
+		add(bRecord);
 		
 		uhm = new JButton("엄");
 		add(uhm);
@@ -63,25 +64,67 @@ public class sFrame extends JFrame {
 		sik = new JButton("식");
 		add(sik);
 		
+		// 텍스트 필드 생성
+		JTextField tf = new JTextField("텍스트 필드를 입력");
+		add(tf);
+		
 		// 버튼 위치 지정
 		int x = 50;
-		int y = 200;
-		bRecord.setBounds(x, y, 100, 50);	// 기록 배치
-		bCash.setBounds(x*4, y, 120, 50);	// 캐쉬 배치
-		start.setBounds(x*8, y, 100, 50);	// 시작 배치
+		int y = 250;
+		start.setBounds(x, y, 100, 50);	// 기록 배치
+		bCash.setBounds(x+200, y, 120, 50);	// 캐쉬 배치
+		bRecord.setBounds(x+400, y, 100, 50);	// 시작 배치
 		
 		
 		uhm.setBounds(x, y+60, 50, 50);
-		joon.setBounds(x, y+115, 50, 50);
-		sik.setBounds(x, y+170, 50, 50);
+		joon.setBounds(x+50, y+60, 50, 50);
+		sik.setBounds(x+100, y+60, 50, 50);
+		
+		tf.setBounds(x, y+50 + 100, 500, 30);
+		
+	// 버튼 동작
+		
+		// 시작
+		start.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("시작 버튼을 클릭하셨습니다.");
+				startFlag = true;
+				
+				if(startFlag) {
+					(new sThread()).start();
+				}
+				
+				System.out.println("startFlag : " + startFlag);
+				System.out.println("-------------------------");
+			}
+		});
+		
+		// 캐쉬조회 ******************************************************
+		bCash.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("캐쉬조회 버튼을 클릭하셨습니다.");
+				
+			}
+		});
+		
+		// 기록 *********************************************************
+		bRecord.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("기록 버튼을 클릭하셨습니다.");
+				
+			}
+		});
 		
 		
 	}
 	
-	
-	// DB연결
-	
-	
+	// DB연결 메소드 ******************************************************
 	
 	
 	// 달팽이 게임
@@ -90,6 +133,8 @@ public class sFrame extends JFrame {
 		setSize(900, 500);
 		
 		bSet();	// 버튼 배치
+		
+		//gameActionListener listener = new gameActionListener(this);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setLayout(null);	// 절대 위치를 사용
@@ -112,14 +157,8 @@ public class sFrame extends JFrame {
 //			label3.setBounds(100, 100, 100, 100);
 			
 			
+			//backGroung();	// 배경화면
 			
-// -----------------------------------------------------------------
-
-			
-			
-			
-			// 스레드 실행
-			(new sThread()).start();
 			setVisible(true);
 	
 	}
