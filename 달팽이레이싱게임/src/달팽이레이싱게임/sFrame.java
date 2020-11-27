@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class sFrame extends JFrame {
@@ -22,32 +23,38 @@ public class sFrame extends JFrame {
 	static JLabel label3;
 	
 	// 달팽이 x좌표
-	static int x1 = 50, 
-			   x2 = 50, 
-			   x3 = 50;
+	static int x1, x2, x3  = 50;
+
+	
+	// 베팅 여부
+	static String betting;		// 베팅 확인을 위한 변수 (1:엄, 2:준, 3:식)
+	boolean isWin = false;		// 베팅에 성공 하였는지 확인을 위한 변수
 	
 	// 버튼
 	private JButton bRecord;	// 기록 보기
 	private JButton start;		// 게임 시작
 	private JButton bCash;		// 현재금액 조회
 	
-	private JButton uhm;
-	private JButton joon;
-	private JButton sik;
+	private JButton uhm;		// 버튼 엄
+	private JButton joon;		// 버튼 준
+	private JButton sik;		// 버튼 식
 	
-	static JTextField tf;
+	static JTextField tf;		// 텍스트 필드
 	
-	boolean startFlag = false;	// 스레드 시작
-
-	// 배경
-//	JLabel bg = new JLabel(new ImageIcon("field.png"));
-//	public void backGroung() {
-//		bg.setBounds(0, 10, 600, 200);
-//		add(bg);
-//	}
+	boolean startFlag = false;			// 스레드 시작
+	static boolean isStart   = true;	// 시작버튼 중복 클릭 방지
+	static boolean isBetted  = false;	// 베팅을 했는지 확인을 위한 변수
+	
+	
+// 배경 배치   *************************************************************
+	JLabel bg = new JLabel(new ImageIcon("bg1.png"));
+	public void backGroung() {
+		bg.setBounds(0, 0, 900, 460);
+		add(bg);
+	}
 		
 	
-	// 버튼 생성 & 배치
+// 버튼 생성 & 배치  *************************************************************
 	public void bSet() {
 		//setLayout(null);	// 절대위치 사용
 		
@@ -57,7 +64,7 @@ public class sFrame extends JFrame {
 		bCash = new JButton("캐쉬 조회");
 		add(bCash);
 		
-		bRecord = new JButton("기록");
+		bRecord = new JButton("기록조회");
 		add(bRecord);
 		
 		uhm = new JButton("엄");
@@ -85,26 +92,36 @@ public class sFrame extends JFrame {
 		
 		tf.setBounds(x, y+50 + 100, 500, 30);	// 텍스트필드 배치
 		
-	// 버튼 동작
+// 버튼 동작 ******************************************************************
 		
-		// 시작
+		// 시작 버튼을 눌렀을 때
 		start.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("시작 버튼을 클릭하셨습니다.");
-				startFlag = true;
-				
-				if(startFlag) {
-					(new sThread()).start();
-				}
-				
-				System.out.println("startFlag : " + startFlag);
-				System.out.println("-------------------------");
-			}
+				if(isBetted) {	// 베팅을 먼저 하였는지 확인한다.
+					if(isStart) {	// 시작버튼을 또 눌러서 동작하지 못하게 한다.
+						System.out.println("시작 버튼을 클릭하셨습니다.");
+						startFlag = true;
+						isStart = false;
+						
+						if(startFlag) {
+							(new sThread()).start();
+						}
+						
+						System.out.println("startFlag : " + startFlag);
+						System.out.println("------------------------------");
+					} else {
+						System.out.println("이미 시작하였습니다.");
+						tf.setText("이미 시작 하였습니다.");
+					}	
+				} else {
+					tf.setText("먼저 베팅을 해야 합니다.");
+				}		
+			}	
 		});
 		
-		// 캐쉬조회 ******************************************************
+		// 캐쉬조회  버튼을 눌렀을 때
 		bCash.addActionListener(new ActionListener() {
 			
 			@Override
@@ -116,52 +133,126 @@ public class sFrame extends JFrame {
 		});
 		
 		
-		// 기록 *********************************************************
+		// 기록조회 버튼을 눌렀을 때
 		bRecord.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("기록 버튼을 클릭하셨습니다.");
+				System.out.println("기록조회 버튼을 클릭하셨습니다.");
+				
+				recordFrame rFrame = new recordFrame();
 				
 			}
 		});
 		
+		
+		// 엄 버튼을 눌렀을 떄
 		uhm.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("엄 버튼을 클릭하셨습니다.");
+			
+				if(isBetted) {
+					System.out.println("이미 베팅 하였습니다.");
+					tf.setText("이미 베팅 하였습니다.");
+				} else {
+					// 베팅을 제대로 하였는지 확인한다.
+					int result = JOptionPane.showConfirmDialog(null, 
+								 "'엄'에 베팅 하시겠습니까?", 
+								 "Confirm", 
+								 JOptionPane.YES_NO_OPTION);
 				
+					if(result == JOptionPane.CLOSED_OPTION) {
+						tf.setText("창을 닫았습니다.");
+					} else 
+					if(result == JOptionPane.YES_OPTION) {
+						tf.setText("'엄'에 베팅 하였습니다.");
+						betting = "엄";
+						isBetted = true;
+						System.out.println("betting : " + betting);
+					} else {
+						tf.setText("취소하였습니다.");
+					}	
+				}
+				
+
 			}
-		});
+		});// end uhm.addActionListener
 		
+		
+		// 준 버튼을 눌렀을 때
 		joon.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("준 버튼을 클릭하셨습니다.");
 				
+				if(isBetted) {
+					System.out.println("이미 베팅 하였습니다.");
+					tf.setText("이미 베팅 하였습니다.");
+				} else {
+					// 베팅을 제대로 하였는지 확인한다.
+					int result = JOptionPane.showConfirmDialog(null, 
+								 "'준'에 베팅 하시겠습니까?", 
+								 "Confirm", 
+								 JOptionPane.YES_NO_OPTION);
+				
+					if(result == JOptionPane.CLOSED_OPTION) {
+						tf.setText("창을 닫았습니다.");
+					} else 
+					if(result == JOptionPane.YES_OPTION) {
+						tf.setText("'준'에 베팅 하였습니다.");
+						betting = "준";
+						isBetted = true;
+						System.out.println("betting : " + betting);
+					} else {
+						tf.setText("취소하였습니다.");
+					}	
+				}
+				
 			}
-		});
+		});// end joon.addActionListener
 		
+		
+		// 식 버튼을 눌렀을 때
 		sik.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("식 버튼을 클릭하셨습니다.");
 				
+				if(isBetted) {
+					System.out.println("이미 베팅 하였습니다.");
+					tf.setText("이미 베팅 하였습니다.");
+				} else {
+					// 베팅을 제대로 하였는지 확인한다.
+					int result = JOptionPane.showConfirmDialog(null, 
+								 "'식'에 베팅 하시겠습니까?", 
+								 "Confirm", 
+								 JOptionPane.YES_NO_OPTION);
+				
+					if(result == JOptionPane.CLOSED_OPTION) {
+						tf.setText("창을 닫았습니다.");
+					} else 
+					if(result == JOptionPane.YES_OPTION) {
+						tf.setText("'식'에 베팅 하였습니다.");
+						betting = "식";
+						isBetted = true;
+						System.out.println("betting : " + betting);
+					} else {
+						tf.setText("취소하였습니다.");
+					}
+				}
+
 			}
-		});
+		});// end sik.addActionListener
 		
 		
 	}// end public void bSet
 	
-	// 배팅 설정 *****************************************************
 	
-	
-	
-	
-	// 달팽이 게임
+// 달팽이 게임 프레임 ************************************************************
 	public sFrame() {
 		setTitle("SnailRace");
 		setSize(900, 500);
@@ -184,17 +275,14 @@ public class sFrame extends JFrame {
 			label3 = new JLabel();
 			label3.setIcon(new ImageIcon("c.gif"));		
 			add(label3);
-			
-			// 오른쪽에 정렬
-//			label1.setBounds(100, 0, 100, 100);	
-//			label2.setBounds(100, 50, 100, 100);
-//			label3.setBounds(100, 100, 100, 100);
+
 			
 			
-			//backGroung();	// 배경화면
+			backGroung();	// 배경화면
 			
 			setVisible(true);
 	
 	}
+
 
 }
