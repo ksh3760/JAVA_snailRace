@@ -1,5 +1,6 @@
 package 달팽이레이싱게임;
 import java.awt.Component;
+import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -34,6 +35,8 @@ public class sFrame extends JFrame {
 	private JButton joon;
 	private JButton sik;
 	
+	static JTextField tf;
+	
 	boolean startFlag = false;	// 스레드 시작
 
 	// 배경
@@ -65,14 +68,14 @@ public class sFrame extends JFrame {
 		add(sik);
 		
 		// 텍스트 필드 생성
-		JTextField tf = new JTextField("텍스트 필드를 입력");
+		tf = new JTextField("텍스트 필드를 입력");
 		add(tf);
 		
 		// 버튼 위치 지정
 		int x = 50;
 		int y = 250;
-		start.setBounds(x, y, 100, 50);	// 기록 배치
-		bCash.setBounds(x+200, y, 120, 50);	// 캐쉬 배치
+		start.setBounds(x, y, 100, 50);			// 기록 배치
+		bCash.setBounds(x+200, y, 120, 50);		// 캐쉬 배치
 		bRecord.setBounds(x+400, y, 100, 50);	// 시작 배치
 		
 		
@@ -80,7 +83,7 @@ public class sFrame extends JFrame {
 		joon.setBounds(x+50, y+60, 50, 50);
 		sik.setBounds(x+100, y+60, 50, 50);
 		
-		tf.setBounds(x, y+50 + 100, 500, 30);
+		tf.setBounds(x, y+50 + 100, 500, 30);	// 텍스트필드 배치
 		
 	// 버튼 동작
 		
@@ -107,7 +110,7 @@ public class sFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("캐쉬조회 버튼을 클릭하셨습니다.");
-				
+				sDb.ckeckCash();
 			}
 		});
 		
@@ -125,6 +128,7 @@ public class sFrame extends JFrame {
 	}
 	
 	// DB연결 메소드 ******************************************************
+	
 	
 	
 	// 달팽이 게임

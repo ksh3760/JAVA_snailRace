@@ -1,8 +1,23 @@
 package 달팽이레이싱게임;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class sThread extends Thread {
 	
-	public void run() {
+	public void run() {		// 왼쪽에 정렬
+		
+		cTime();
+		System.out.println(" 시작");
+		System.out.println("-------------------------");
+		
+		// 위치 초기화
+		sFrame.x1 = 100;
+		sFrame.x2 = 100;
+		sFrame.x3 = 100;
+		sFrame.label1.setBounds(100, 0, 100, 100);	
+		sFrame.label2.setBounds(100, 50, 100, 100);
+		sFrame.label3.setBounds(100, 100, 100, 100);
 		
 		for(int i = 0 ; i < 300 ; i++) {
 			try {
@@ -30,17 +45,16 @@ public class sThread extends Thread {
 		} else {
 			System.out.println("1등 : 식");
 		}
-		
-	// 재배치
-		// 왼쪽에 정렬
-		sFrame.label1.setBounds(100, 0, 100, 100);	
-		sFrame.label2.setBounds(100, 50, 100, 100);
-		sFrame.label3.setBounds(100, 100, 100, 100);
-		// x좌표 초기화
-		sFrame.x1 = 100;
-		sFrame.x2 = 100;
-		sFrame.x3 = 100;
-		
+
 	}
+	
+	// 시간 기록
+	public void cTime() {
+		SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
+		Date dTime = new Date();		
+		String sTime = format1.format(dTime);			
+		System.out.print(sTime);
+	}
+	
 	
 }
