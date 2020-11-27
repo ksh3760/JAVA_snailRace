@@ -254,7 +254,7 @@ public class sFrame extends JFrame {
 	
 // 달팽이 게임 프레임 ************************************************************
 	public sFrame() {
-		setTitle("SnailRace");
+		setTitle("엄준식 달팽이 레이싱");
 		setSize(900, 500);
 		
 		bSet();	// 버튼 배치
