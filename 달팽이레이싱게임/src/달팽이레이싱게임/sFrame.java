@@ -68,7 +68,7 @@ public class sFrame extends JFrame {
 		add(sik);
 		
 		// 텍스트 필드 생성
-		tf = new JTextField("텍스트 필드를 입력");
+		tf = new JTextField("텍스트를 입력");
 		add(tf);
 		
 		// 버튼 위치 지정
@@ -112,7 +112,9 @@ public class sFrame extends JFrame {
 				System.out.println("캐쉬조회 버튼을 클릭하셨습니다.");
 				sDb.ckeckCash();
 			}
+
 		});
+		
 		
 		// 기록 *********************************************************
 		bRecord.addActionListener(new ActionListener() {
@@ -124,10 +126,38 @@ public class sFrame extends JFrame {
 			}
 		});
 		
+		uhm.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("엄 버튼을 클릭하셨습니다.");
+				
+			}
+		});
 		
-	}
+		joon.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("준 버튼을 클릭하셨습니다.");
+				
+			}
+		});
+		
+		sik.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("식 버튼을 클릭하셨습니다.");
+				
+			}
+		});
+		
+		
+	}// end public void bSet
 	
-	// DB연결 메소드 ******************************************************
+	// 배팅 설정 *****************************************************
+	
 	
 	
 	

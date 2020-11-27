@@ -6,6 +6,8 @@ public class sDb {
 	static Connection con;
 	static Statement stmt;
 	
+	static String bCash;
+	
 	public sDb() {
 		// 1. JDBC 드라이버를 적재
 		System.out.println("------------------------------");
@@ -32,7 +34,7 @@ public class sDb {
 		System.out.println("------------------------------");
 	}
 	
-	// 캐쉬 조회
+	// 캐쉬 조회 ***************************************
 	public static void ckeckCash() {
 		
 		
@@ -42,11 +44,14 @@ public class sDb {
 			sql = "select u_cash from userInfo where u_name = 'John Doe'";
 			ResultSet rs = stmt.executeQuery(sql);
 			System.out.println("쿼리를 요청하였습니다.");
+			
 			while(rs.next()) {
-				System.out.println(rs.getInt(sql));
+				bCash = rs.getString("u_cash");	// 현재 캐쉬 
+				System.out.println("현재 캐쉬 : " + bCash);
 			}
 			
-			
+			// 현재 캐쉬를 텍스트에 출력한다.
+			sFrame.tf.setText("현재 캐쉬 : " + bCash);
 			
 		} catch (SQLException e) {
 			System.out.println("캐쉬 조회중 오류가 발생하였습니다.");
