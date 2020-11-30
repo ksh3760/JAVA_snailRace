@@ -1,4 +1,4 @@
-package ´ŞÆØÀÌ·¹ÀÌ½Ì°ÔÀÓ;
+package ë‹¬íŒ½ì´ë ˆì´ì‹±ê²Œì„;
 
 import java.sql.*;
 
@@ -9,32 +9,32 @@ public class sDb {
 	static String bCash;
 	
 	public sDb() {
-		// 1. JDBC µå¶óÀÌ¹ö¸¦ ÀûÀç
+		// 1. JDBC ë“œë¼ì´ë²„ë¥¼ ì ì¬
 		System.out.println("------------------------------");
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			System.out.println("µå¶óÀÌ¹ö ÀûÀç ¼º°ø");
+			System.out.println("ë“œë¼ì´ë²„ ì ì¬ ì„±ê³µ");
 		} catch (ClassNotFoundException e) {
-			System.out.println("µå¶óÀÌ¹ö¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù.");
+			System.out.println("ë“œë¼ì´ë²„ë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
 		}
 			
-		// 2. DB ¿¬°á
-		String url		= "jdnc:oracle:thin:@net.yju.ac.kr:1521:orcl";	// oracle DB Á¢¼ÓÀ» À§ÇÑ url
-		String id 		= "s1701052";									// oracle DB Á¢¼ÓÀ» À§ÇÑ ¾ÆÀÌµğ
-		String password = "p1701052";									// oracle DB Á¢¼ÓÀ» À§ÇÑ ÆĞ½º¿öµå
+		// 2. DB ì—°ê²°
+		String url		= "jdnc:oracle:thin:@net.yju.ac.kr:1521:orcl";	// oracle DB ì ‘ì†ì„ ìœ„í•œ url
+		String id 		= "s1701052";									// oracle DB ì ‘ì†ì„ ìœ„í•œ ì•„ì´ë””
+		String password = "p1701052";									// oracle DB ì ‘ì†ì„ ìœ„í•œ íŒ¨ìŠ¤ì›Œë“œ
 		con 	= null;
 		
 		try {
 			con = DriverManager.getConnection(url , id, password);
-			System.out.println("¿¬°á ¼º°ø");
+			System.out.println("ì—°ê²° ì„±ê³µ");
 		} catch (SQLException e) {
-			System.out.println("¿¬°á ¿À·ù");
+			System.out.println("ì—°ê²° ì˜¤ë¥˜");
 		}
 
 		System.out.println("------------------------------");
 	}
 	
-	// Ä³½¬ Á¶È¸
+	// ìºì‰¬ ì¡°íšŒ
 	public static void ckeckCash() {
 
 		try {
@@ -42,40 +42,40 @@ public class sDb {
 			String sql = null;
 			sql = "select u_cash from userInfo where u_name = 'John Doe'";
 			ResultSet rs = stmt.executeQuery(sql);
-			System.out.println("Äõ¸®¸¦ ¿äÃ»ÇÏ¿´½À´Ï´Ù.");
+			System.out.println("ì¿¼ë¦¬ë¥¼ ìš”ì²­í•˜ì˜€ìŠµë‹ˆë‹¤.");
 			
 			while(rs.next()) {
-				bCash = rs.getString("u_cash");	// ÇöÀç Ä³½¬ 
-				System.out.println("ÇöÀç Ä³½¬ : " + bCash);
+				bCash = rs.getString("u_cash");	// í˜„ì¬ ìºì‰¬ 
+				System.out.println("í˜„ì¬ ìºì‰¬ : " + bCash);
 			}
-			// ÇöÀç Ä³½¬¸¦ ÅØ½ºÆ®¿¡ Ãâ·ÂÇÑ´Ù.
-			sFrame.tf.setText("ÇöÀç Ä³½¬ : " + bCash);
+			// í˜„ì¬ ìºì‰¬ë¥¼ í…ìŠ¤íŠ¸ì— ì¶œë ¥í•œë‹¤.
+			sFrame.tf.setText("í˜„ì¬ ìºì‰¬ : " + bCash);
 		} catch (SQLException e) {
-			System.out.println("Ä³½¬ Á¶È¸Áß ¿À·ù°¡ ¹ß»ıÇÏ¿´½À´Ï´Ù.");
+			System.out.println("ìºì‰¬ ì¡°íšŒì¤‘ ì˜¤ë¥˜ê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤.");
 		}
 		
 	}
 	
-	// °æ±â °á°ú ±â·Ï **************************************************
+	// ê²½ê¸° ê²°ê³¼ ê¸°ë¡ **************************************************
 	public static void updateGameRecord() {
 		try {
 			stmt = con.createStatement();
 			
 			String  sql = "INSERT into GAMERECORD VALUES (cntRound.NEXTVAL, '" + sThread.sTime + "','" + sThread.winSnail + "')";
 			stmt.executeUpdate(sql);
-			System.out.println("°æ±â ±â·Ï¿¡ ¼º°øÇÏ¿´½À´Ï´Ù.");
+			System.out.println("ê²½ê¸° ê¸°ë¡ì— ì„±ê³µí•˜ì˜€ìŠµë‹ˆë‹¤.");
 		} catch (Exception e) {
-			System.out.println("°æ±â °á°ú ±â·Ï Áß ¿À·ù°¡ ¹ß»ıÇÏ¿´½À´Ï´Ù.");
+			System.out.println("ê²½ê¸° ê²°ê³¼ ê¸°ë¡ ì¤‘ ì˜¤ë¥˜ê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤.");
 		}
 	}
 	
 	
-	// ±â·Ï Á¶È¸
+	// ê¸°ë¡ ì¡°íšŒ
 	public static void gameRecord() {
 		try {
 			stmt = con.createStatement();
 			String sql = null;
-			sql = "select * from GAMERECORD";
+			sql = "select * from GAMERECORD ORDER BY G_ROUND";
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			int row = 0;
@@ -85,24 +85,24 @@ public class sDb {
 				recordFrame.contents[row][2] = rs.getString("g_winner");
 				row ++;
 			}
-			System.out.println("°æ±â±â·Ï Á¶È¸¿¡ ¼º°øÇÏ¿´½À´Ï´Ù.");
+			System.out.println("ê²½ê¸°ê¸°ë¡ ì¡°íšŒì— ì„±ê³µí•˜ì˜€ìŠµë‹ˆë‹¤.");
 		} catch (Exception e) {
-			System.out.println("±â·Ï Á¶È¸Áß ¿À·ù°¡ ¹ß»ıÇÏ¿´½À´Ï´Ù.");
+			System.out.println("ê¸°ë¡ ì¡°íšŒì¤‘ ì˜¤ë¥˜ê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤.");
 		}
 		
 	}
 	
 	
-	// º£ÆÃ ¼º°ø
+	// ë² íŒ… ì„±ê³µ
 	public static void winBetting() {
 		try {
 			stmt = con.createStatement();
 			String  sql = "update USERINFO set U_CASH = U_CASH + 1 where U_NAME = 'John Doe'";
 			stmt.executeUpdate(sql);
-			System.out.println("º£ÆÃ ¼öÁ¤¿¡ ¼º°øÇß¼ü´Ï´Ù. (winBetting)");
+			System.out.println("ë² íŒ… ìˆ˜ì •ì— ì„±ê³µí–ˆìˆ©ë‹ˆë‹¤. (winBetting)");
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.out.println("º£ÆÃ ¾÷µ¥ÀÌÆ® Áß ¿À·ù°¡ ¹ß»ıÇÏ¿´½À´Ï´Ù.");
+			System.out.println("ë² íŒ… ì—…ë°ì´íŠ¸ ì¤‘ ì˜¤ë¥˜ê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤.");
 		}
 		
 	}// end winBetting()
@@ -112,10 +112,10 @@ public class sDb {
 			stmt = con.createStatement();
 			String  sql = "update USERINFO set U_CASH = U_CASH - 1 where U_NAME = 'John Doe'";
 			stmt.executeUpdate(sql);
-			System.out.println("º£ÆÃ ¼öÁ¤¿¡ ¼º°øÇß¼ü´Ï´Ù. (loseBetting)");
+			System.out.println("ë² íŒ… ìˆ˜ì •ì— ì„±ê³µí–ˆìˆ©ë‹ˆë‹¤. (loseBetting)");
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.out.println("º£ÆÃ ¾÷µ¥ÀÌÆ® Áß ¿À·ù°¡ ¹ß»ıÇÏ¿´½À´Ï´Ù.");
+			System.out.println("ë² íŒ… ì—…ë°ì´íŠ¸ ì¤‘ ì˜¤ë¥˜ê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤.");
 		}
 	}// end loseBetting()
 	
