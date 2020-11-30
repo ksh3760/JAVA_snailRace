@@ -100,40 +100,45 @@ public class sFrame extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			
 				// 시작 전 유저가 보유한 캐쉬를 확인한다.
 				sDb.ckeckCash();
-				if(Integer.parseInt(sDb.bCash) < 1) {	// 캐쉬가 0일 시 게임을 못하게 한다.
+				if(Integer.parseInt(sDb.bCash) < 1) {	
 					isAlive = false;
 					sDb.userDead();
 				}
 				
-				if(isAlive) {
-					if(isBetted) {	// 베팅을 먼저 하였는지 확인한다.
-						if(isStart) {	// 시작버튼을 또 눌러서 동작하지 못하게 한다.
+				if(isAlive) {											// 캐쉬가 0일 시 게임을 못하게 한다.
+					if(isBetted) {										// 베팅을 먼저 하였는지 확인한다.
+						if(isStart) {									// 시작버튼을 또 눌러서 동작하지 못하게 한다.
 							System.out.println("시작 버튼을 클릭하셨습니다.");
 							startFlag = true;
 							isStart = false;
 							
-							if(startFlag) {
+							if(startFlag) {								// 시작 버튼을 누르면 게임을 진행
 								(new sThread()).start();
 							}
 							
 							System.out.println("startFlag : " + startFlag);
 							System.out.println("------------------------------");
+							
 						} else {
 							System.out.println("이미 시작하였습니다.");
 							tf.setText("이미 시작 하였습니다.");
 						}	
+						
 					} else {
 						tf.setText("먼저 베팅을 해야 합니다.");
-					}		
+					}	
+					
 				} else {
 					System.out.println("사용자 목숨이 0입니다.");
 					tf.setText("사용자 목숨이 0이므로 시작할 수 없습니다.");
 				}
+				
 			}
-		});
+			
+		});// end start.addActionListener
+		
 		
 		// 캐쉬조회  버튼을 눌렀을 때
 		bCash.addActionListener(new ActionListener() {
@@ -296,5 +301,4 @@ public class sFrame extends JFrame {
 	
 	}
 
-
-}
+}// end public class sFrame extends JFrame
