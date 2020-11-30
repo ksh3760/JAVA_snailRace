@@ -1,4 +1,4 @@
-package ´ŞÆØÀÌ·¹ÀÌ½Ì°ÔÀÓ;
+package ë‹¬íŒ½ì´ë ˆì´ì‹±ê²Œì„;
 import java.awt.Component;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
@@ -17,36 +17,37 @@ import javax.swing.JTextField;
 
 public class sFrame extends JFrame {
 	
-	// ´ŞÆØÀÌ ·¹ÀÌºí
+	// ë‹¬íŒ½ì´ ë ˆì´ë¸”
 	static JLabel label1;	
 	static JLabel label2;
 	static JLabel label3;
 	
-	// ´ŞÆØÀÌ xÁÂÇ¥
+	// ë‹¬íŒ½ì´ xì¢Œí‘œ
 	static int x1, x2, x3  = 50;
 
 	
-	// º£ÆÃ ¿©ºÎ
-	static String betting;		// º£ÆÃ È®ÀÎÀ» À§ÇÑ º¯¼ö (1:¾ö, 2:ÁØ, 3:½Ä)
-	boolean isWin = false;		// º£ÆÃ¿¡ ¼º°ø ÇÏ¿´´ÂÁö È®ÀÎÀ» À§ÇÑ º¯¼ö
+	// ë² íŒ… ì—¬ë¶€
+	static String betting;		// ë² íŒ… í™•ì¸ì„ ìœ„í•œ ë³€ìˆ˜ (1:ì—„, 2:ì¤€, 3:ì‹)
+	boolean isWin = false;		// ë² íŒ…ì— ì„±ê³µ í•˜ì˜€ëŠ”ì§€ í™•ì¸ì„ ìœ„í•œ ë³€ìˆ˜
 	
-	// ¹öÆ°
-	private JButton bRecord;	// ±â·Ï º¸±â
-	private JButton start;		// °ÔÀÓ ½ÃÀÛ
-	private JButton bCash;		// ÇöÀç±İ¾× Á¶È¸
+	// ë²„íŠ¼
+	private JButton bRecord;	// ê¸°ë¡ ë³´ê¸°
+	private JButton start;		// ê²Œì„ ì‹œì‘
+	private JButton bCash;		// í˜„ì¬ê¸ˆì•¡ ì¡°íšŒ
 	
-	private JButton uhm;		// ¹öÆ° ¾ö
-	private JButton joon;		// ¹öÆ° ÁØ
-	private JButton sik;		// ¹öÆ° ½Ä
+	private JButton uhm;		// ë²„íŠ¼ ì—„
+	private JButton joon;		// ë²„íŠ¼ ì¤€
+	private JButton sik;		// ë²„íŠ¼ ì‹
 	
-	static JTextField tf;		// ÅØ½ºÆ® ÇÊµå
+	static JTextField tf;		// í…ìŠ¤íŠ¸ í•„ë“œ
 	
-	boolean startFlag = false;			// ½º·¹µå ½ÃÀÛ
-	static boolean isStart   = true;	// ½ÃÀÛ¹öÆ° Áßº¹ Å¬¸¯ ¹æÁö
-	static boolean isBetted  = false;	// º£ÆÃÀ» Çß´ÂÁö È®ÀÎÀ» À§ÇÑ º¯¼ö
+	boolean startFlag = false;			// ìŠ¤ë ˆë“œ ì‹œì‘
+	static boolean isStart   = true;	// ì‹œì‘ë²„íŠ¼ ì¤‘ë³µ í´ë¦­ ë°©ì§€
+	static boolean isBetted  = false;	// ë² íŒ…ì„ í–ˆëŠ”ì§€ í™•ì¸ì„ ìœ„í•œ ë³€ìˆ˜
 	
+	static boolean isAlive = true;	// ì‚¬ìš©ìì˜ ëª©ìˆ¨ì„ í™•ì¸í•˜ëŠ” ë³€ìˆ˜
 	
-// ¹è°æ ¹èÄ¡   *************************************************************
+// ë°°ê²½ ë°°ì¹˜   *************************************************************
 	JLabel bg = new JLabel(new ImageIcon("bg1.png"));
 	public void backGroung() {
 		bg.setBounds(0, 0, 900, 460);
@@ -54,91 +55,104 @@ public class sFrame extends JFrame {
 	}
 		
 	
-// ¹öÆ° »ı¼º & ¹èÄ¡  *************************************************************
+// ë²„íŠ¼ ìƒì„± & ë°°ì¹˜  *************************************************************
 	public void bSet() {
-		//setLayout(null);	// Àı´ëÀ§Ä¡ »ç¿ë
+		//setLayout(null);	// ì ˆëŒ€ìœ„ì¹˜ ì‚¬ìš©
 		
-		start = new JButton("½ÃÀÛ");
+		start = new JButton("ì‹œì‘");
 		add(start);
 		
-		bCash = new JButton("Ä³½¬ Á¶È¸");
+		bCash = new JButton("ìºì‰¬ ì¡°íšŒ");
 		add(bCash);
 		
-		bRecord = new JButton("±â·ÏÁ¶È¸");
+		bRecord = new JButton("ê¸°ë¡ì¡°íšŒ");
 		add(bRecord);
 		
-		uhm = new JButton("¾ö");
+		uhm = new JButton("ì—„");
 		add(uhm);
-		joon = new JButton("ÁØ");
+		joon = new JButton("ì¤€");
 		add(joon);
-		sik = new JButton("½Ä");
+		sik = new JButton("ì‹");
 		add(sik);
 		
-		// ÅØ½ºÆ® ÇÊµå »ı¼º
-		tf = new JTextField("ÅØ½ºÆ®¸¦ ÀÔ·Â");
+		// í…ìŠ¤íŠ¸ í•„ë“œ ìƒì„±
+		tf = new JTextField("â˜…ì—„ì¤€ì‹ ë‹¬íŒ½ì´ ê²Œì„â˜…");
 		add(tf);
 		
-		// ¹öÆ° À§Ä¡ ÁöÁ¤
+		// ë²„íŠ¼ ìœ„ì¹˜ ì§€ì •
 		int x = 50;
 		int y = 250;
-		start.setBounds(x, y, 100, 50);			// ±â·Ï ¹èÄ¡
-		bCash.setBounds(x+200, y, 120, 50);		// Ä³½¬ ¹èÄ¡
-		bRecord.setBounds(x+400, y, 100, 50);	// ½ÃÀÛ ¹èÄ¡
+		start.setBounds(x, y, 100, 50);			// ê¸°ë¡ ë°°ì¹˜
+		bCash.setBounds(x+200, y, 120, 50);		// ìºì‰¬ ë°°ì¹˜
+		bRecord.setBounds(x+400, y, 100, 50);	// ì‹œì‘ ë°°ì¹˜
 		
 		
 		uhm.setBounds(x, y+60, 50, 50);
 		joon.setBounds(x+50, y+60, 50, 50);
 		sik.setBounds(x+100, y+60, 50, 50);
 		
-		tf.setBounds(x, y+50 + 100, 500, 30);	// ÅØ½ºÆ®ÇÊµå ¹èÄ¡
+		tf.setBounds(x, y+50 + 100, 500, 30);	// í…ìŠ¤íŠ¸í•„ë“œ ë°°ì¹˜
 		
-// ¹öÆ° µ¿ÀÛ ******************************************************************
+// ë²„íŠ¼ ë™ì‘ ******************************************************************
 		
-		// ½ÃÀÛ ¹öÆ°À» ´­·¶À» ¶§
+		// ì‹œì‘ ë²„íŠ¼ì„ ëˆŒë €ì„ ë•Œ
 		start.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(isBetted) {	// º£ÆÃÀ» ¸ÕÀú ÇÏ¿´´ÂÁö È®ÀÎÇÑ´Ù.
-					if(isStart) {	// ½ÃÀÛ¹öÆ°À» ¶Ç ´­·¯¼­ µ¿ÀÛÇÏÁö ¸øÇÏ°Ô ÇÑ´Ù.
-						System.out.println("½ÃÀÛ ¹öÆ°À» Å¬¸¯ÇÏ¼Ì½À´Ï´Ù.");
-						startFlag = true;
-						isStart = false;
-						
-						if(startFlag) {
-							(new sThread()).start();
-						}
-						
-						System.out.println("startFlag : " + startFlag);
-						System.out.println("------------------------------");
+			
+				// ì‹œì‘ ì „ ìœ ì €ê°€ ë³´ìœ í•œ ìºì‰¬ë¥¼ í™•ì¸í•œë‹¤.
+				sDb.ckeckCash();
+				if(Integer.parseInt(sDb.bCash) < 1) {	// ìºì‰¬ê°€ 0ì¼ ì‹œ ê²Œì„ì„ ëª»í•˜ê²Œ í•œë‹¤.
+					isAlive = false;
+					sDb.userDead();
+				}
+				
+				if(isAlive) {
+					if(isBetted) {	// ë² íŒ…ì„ ë¨¼ì € í•˜ì˜€ëŠ”ì§€ í™•ì¸í•œë‹¤.
+						if(isStart) {	// ì‹œì‘ë²„íŠ¼ì„ ë˜ ëˆŒëŸ¬ì„œ ë™ì‘í•˜ì§€ ëª»í•˜ê²Œ í•œë‹¤.
+							System.out.println("ì‹œì‘ ë²„íŠ¼ì„ í´ë¦­í•˜ì…¨ìŠµë‹ˆë‹¤.");
+							startFlag = true;
+							isStart = false;
+							
+							if(startFlag) {
+								(new sThread()).start();
+							}
+							
+							System.out.println("startFlag : " + startFlag);
+							System.out.println("------------------------------");
+						} else {
+							System.out.println("ì´ë¯¸ ì‹œì‘í•˜ì˜€ìŠµë‹ˆë‹¤.");
+							tf.setText("ì´ë¯¸ ì‹œì‘ í•˜ì˜€ìŠµë‹ˆë‹¤.");
+						}	
 					} else {
-						System.out.println("ÀÌ¹Ì ½ÃÀÛÇÏ¿´½À´Ï´Ù.");
-						tf.setText("ÀÌ¹Ì ½ÃÀÛ ÇÏ¿´½À´Ï´Ù.");
-					}	
+						tf.setText("ë¨¼ì € ë² íŒ…ì„ í•´ì•¼ í•©ë‹ˆë‹¤.");
+					}		
 				} else {
-					tf.setText("¸ÕÀú º£ÆÃÀ» ÇØ¾ß ÇÕ´Ï´Ù.");
-				}		
-			}	
+					System.out.println("ì‚¬ìš©ì ëª©ìˆ¨ì´ 0ì…ë‹ˆë‹¤.");
+					tf.setText("ì‚¬ìš©ì ëª©ìˆ¨ì´ 0ì´ë¯€ë¡œ ì‹œì‘í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
+				}
+			}
 		});
 		
-		// Ä³½¬Á¶È¸  ¹öÆ°À» ´­·¶À» ¶§
+		// ìºì‰¬ì¡°íšŒ  ë²„íŠ¼ì„ ëˆŒë €ì„ ë•Œ
 		bCash.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Ä³½¬Á¶È¸ ¹öÆ°À» Å¬¸¯ÇÏ¼Ì½À´Ï´Ù.");
+				System.out.println("ìºì‰¬ì¡°íšŒ ë²„íŠ¼ì„ í´ë¦­í•˜ì…¨ìŠµë‹ˆë‹¤.");
 				sDb.ckeckCash();
 			}
 
 		});
 		
 		
-		// ±â·ÏÁ¶È¸ ¹öÆ°À» ´­·¶À» ¶§
+		// ê¸°ë¡ì¡°íšŒ ë²„íŠ¼ì„ ëˆŒë €ì„ ë•Œ
 		bRecord.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("±â·ÏÁ¶È¸ ¹öÆ°À» Å¬¸¯ÇÏ¼Ì½À´Ï´Ù.");
+				System.out.println("ê¸°ë¡ì¡°íšŒ ë²„íŠ¼ì„ í´ë¦­í•˜ì…¨ìŠµë‹ˆë‹¤.");
 				
 				recordFrame rFrame = new recordFrame();
 				
@@ -146,33 +160,33 @@ public class sFrame extends JFrame {
 		});
 		
 		
-		// ¾ö ¹öÆ°À» ´­·¶À» ‹š
+		// ì—„ ë²„íŠ¼ì„ ëˆŒë €ì„ ë–„
 		uhm.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("¾ö ¹öÆ°À» Å¬¸¯ÇÏ¼Ì½À´Ï´Ù.");
+				System.out.println("ì—„ ë²„íŠ¼ì„ í´ë¦­í•˜ì…¨ìŠµë‹ˆë‹¤.");
 			
 				if(isBetted) {
-					System.out.println("ÀÌ¹Ì º£ÆÃ ÇÏ¿´½À´Ï´Ù.");
-					tf.setText("ÀÌ¹Ì º£ÆÃ ÇÏ¿´½À´Ï´Ù.");
+					System.out.println("ì´ë¯¸ ë² íŒ… í•˜ì˜€ìŠµë‹ˆë‹¤.");
+					tf.setText("ì´ë¯¸ ë² íŒ… í•˜ì˜€ìŠµë‹ˆë‹¤.");
 				} else {
-					// º£ÆÃÀ» Á¦´ë·Î ÇÏ¿´´ÂÁö È®ÀÎÇÑ´Ù.
+					// ë² íŒ…ì„ ì œëŒ€ë¡œ í•˜ì˜€ëŠ”ì§€ í™•ì¸í•œë‹¤.
 					int result = JOptionPane.showConfirmDialog(null, 
-								 "'¾ö'¿¡ º£ÆÃ ÇÏ½Ã°Ú½À´Ï±î?", 
+								 "'ì—„'ì— ë² íŒ… í•˜ì‹œê² ìŠµë‹ˆê¹Œ?", 
 								 "Confirm", 
 								 JOptionPane.YES_NO_OPTION);
 				
 					if(result == JOptionPane.CLOSED_OPTION) {
-						tf.setText("Ã¢À» ´İ¾Ò½À´Ï´Ù.");
+						tf.setText("ì°½ì„ ë‹«ì•˜ìŠµë‹ˆë‹¤.");
 					} else 
 					if(result == JOptionPane.YES_OPTION) {
-						tf.setText("'¾ö'¿¡ º£ÆÃ ÇÏ¿´½À´Ï´Ù.");
-						betting = "¾ö";
+						tf.setText("'ì—„'ì— ë² íŒ… í•˜ì˜€ìŠµë‹ˆë‹¤.");
+						betting = "ì—„";
 						isBetted = true;
 						System.out.println("betting : " + betting);
 					} else {
-						tf.setText("Ãë¼ÒÇÏ¿´½À´Ï´Ù.");
+						tf.setText("ì·¨ì†Œí•˜ì˜€ìŠµë‹ˆë‹¤.");
 					}	
 				}
 				
@@ -181,33 +195,33 @@ public class sFrame extends JFrame {
 		});// end uhm.addActionListener
 		
 		
-		// ÁØ ¹öÆ°À» ´­·¶À» ¶§
+		// ì¤€ ë²„íŠ¼ì„ ëˆŒë €ì„ ë•Œ
 		joon.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("ÁØ ¹öÆ°À» Å¬¸¯ÇÏ¼Ì½À´Ï´Ù.");
+				System.out.println("ì¤€ ë²„íŠ¼ì„ í´ë¦­í•˜ì…¨ìŠµë‹ˆë‹¤.");
 				
 				if(isBetted) {
-					System.out.println("ÀÌ¹Ì º£ÆÃ ÇÏ¿´½À´Ï´Ù.");
-					tf.setText("ÀÌ¹Ì º£ÆÃ ÇÏ¿´½À´Ï´Ù.");
+					System.out.println("ì´ë¯¸ ë² íŒ… í•˜ì˜€ìŠµë‹ˆë‹¤.");
+					tf.setText("ì´ë¯¸ ë² íŒ… í•˜ì˜€ìŠµë‹ˆë‹¤.");
 				} else {
-					// º£ÆÃÀ» Á¦´ë·Î ÇÏ¿´´ÂÁö È®ÀÎÇÑ´Ù.
+					// ë² íŒ…ì„ ì œëŒ€ë¡œ í•˜ì˜€ëŠ”ì§€ í™•ì¸í•œë‹¤.
 					int result = JOptionPane.showConfirmDialog(null, 
-								 "'ÁØ'¿¡ º£ÆÃ ÇÏ½Ã°Ú½À´Ï±î?", 
+								 "'ì¤€'ì— ë² íŒ… í•˜ì‹œê² ìŠµë‹ˆê¹Œ?", 
 								 "Confirm", 
 								 JOptionPane.YES_NO_OPTION);
 				
 					if(result == JOptionPane.CLOSED_OPTION) {
-						tf.setText("Ã¢À» ´İ¾Ò½À´Ï´Ù.");
+						tf.setText("ì°½ì„ ë‹«ì•˜ìŠµë‹ˆë‹¤.");
 					} else 
 					if(result == JOptionPane.YES_OPTION) {
-						tf.setText("'ÁØ'¿¡ º£ÆÃ ÇÏ¿´½À´Ï´Ù.");
-						betting = "ÁØ";
+						tf.setText("'ì¤€'ì— ë² íŒ… í•˜ì˜€ìŠµë‹ˆë‹¤.");
+						betting = "ì¤€";
 						isBetted = true;
 						System.out.println("betting : " + betting);
 					} else {
-						tf.setText("Ãë¼ÒÇÏ¿´½À´Ï´Ù.");
+						tf.setText("ì·¨ì†Œí•˜ì˜€ìŠµë‹ˆë‹¤.");
 					}	
 				}
 				
@@ -215,33 +229,33 @@ public class sFrame extends JFrame {
 		});// end joon.addActionListener
 		
 		
-		// ½Ä ¹öÆ°À» ´­·¶À» ¶§
+		// ì‹ ë²„íŠ¼ì„ ëˆŒë €ì„ ë•Œ
 		sik.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("½Ä ¹öÆ°À» Å¬¸¯ÇÏ¼Ì½À´Ï´Ù.");
+				System.out.println("ì‹ ë²„íŠ¼ì„ í´ë¦­í•˜ì…¨ìŠµë‹ˆë‹¤.");
 				
 				if(isBetted) {
-					System.out.println("ÀÌ¹Ì º£ÆÃ ÇÏ¿´½À´Ï´Ù.");
-					tf.setText("ÀÌ¹Ì º£ÆÃ ÇÏ¿´½À´Ï´Ù.");
+					System.out.println("ì´ë¯¸ ë² íŒ… í•˜ì˜€ìŠµë‹ˆë‹¤.");
+					tf.setText("ì´ë¯¸ ë² íŒ… í•˜ì˜€ìŠµë‹ˆë‹¤.");
 				} else {
-					// º£ÆÃÀ» Á¦´ë·Î ÇÏ¿´´ÂÁö È®ÀÎÇÑ´Ù.
+					// ë² íŒ…ì„ ì œëŒ€ë¡œ í•˜ì˜€ëŠ”ì§€ í™•ì¸í•œë‹¤.
 					int result = JOptionPane.showConfirmDialog(null, 
-								 "'½Ä'¿¡ º£ÆÃ ÇÏ½Ã°Ú½À´Ï±î?", 
+								 "'ì‹'ì— ë² íŒ… í•˜ì‹œê² ìŠµë‹ˆê¹Œ?", 
 								 "Confirm", 
 								 JOptionPane.YES_NO_OPTION);
 				
 					if(result == JOptionPane.CLOSED_OPTION) {
-						tf.setText("Ã¢À» ´İ¾Ò½À´Ï´Ù.");
+						tf.setText("ì°½ì„ ë‹«ì•˜ìŠµë‹ˆë‹¤.");
 					} else 
 					if(result == JOptionPane.YES_OPTION) {
-						tf.setText("'½Ä'¿¡ º£ÆÃ ÇÏ¿´½À´Ï´Ù.");
-						betting = "½Ä";
+						tf.setText("'ì‹'ì— ë² íŒ… í•˜ì˜€ìŠµë‹ˆë‹¤.");
+						betting = "ì‹";
 						isBetted = true;
 						System.out.println("betting : " + betting);
 					} else {
-						tf.setText("Ãë¼ÒÇÏ¿´½À´Ï´Ù.");
+						tf.setText("ì·¨ì†Œí•˜ì˜€ìŠµë‹ˆë‹¤.");
 					}
 				}
 
@@ -252,17 +266,15 @@ public class sFrame extends JFrame {
 	}// end public void bSet
 	
 	
-// ´ŞÆØÀÌ °ÔÀÓ ÇÁ·¹ÀÓ ************************************************************
+// ë‹¬íŒ½ì´ ê²Œì„ í”„ë ˆì„ ************************************************************
 	public sFrame() {
-		setTitle("¡Ú¾öÁØ½Ä ´ŞÆØÀÌ ·¹ÀÌ½Ì °ÔÀÓ¡Ú");
+		setTitle("â˜…ì—„ì¤€ì‹ ë‹¬íŒ½ì´ ë ˆì´ì‹± ê²Œì„â˜…");
 		setSize(900, 500);
 		
-		bSet();	// ¹öÆ° ¹èÄ¡
-		
-		//gameActionListener listener = new gameActionListener(this);
+		bSet();	// ë²„íŠ¼ ë°°ì¹˜
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			setLayout(null);	// Àı´ë À§Ä¡¸¦ »ç¿ë
+			setLayout(null);	// ì ˆëŒ€ ìœ„ì¹˜ë¥¼ ì‚¬ìš©
 			
 			label1 = new JLabel();
 			label1.setIcon(new ImageIcon("a.gif"));
@@ -278,7 +290,7 @@ public class sFrame extends JFrame {
 
 			
 			
-			backGroung();	// ¹è°æÈ­¸é
+			backGroung();	// ë°°ê²½í™”ë©´
 			
 			setVisible(true);
 	
