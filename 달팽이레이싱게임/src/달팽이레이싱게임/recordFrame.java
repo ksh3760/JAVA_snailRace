@@ -1,4 +1,4 @@
-package ´ŞÆØÀÌ·¹ÀÌ½Ì°ÔÀÓ;
+package ë‹¬íŒ½ì´ë ˆì´ì‹±ê²Œì„;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
@@ -10,7 +10,7 @@ import javax.swing.JTable;
 
 public class recordFrame extends JFrame {
 	
-	private static final int ROWS = 10;
+	private static final int ROWS = 100;
 	private static final int COLS = 3;
 	
 	public static String[][] contents = new String[ROWS][COLS];
@@ -19,14 +19,14 @@ public class recordFrame extends JFrame {
 	public recordFrame() {
 		Dimension dim = new Dimension(400,150);
 		
-		setTitle("°æ±â ±â·Ï");
+		setTitle("ê²½ê¸° ê¸°ë¡");
 		setSize(500, 300);
 		
 
 		
-		String header[] = {"È¸Â÷", "½Ã°£", "°á°ú"};	
+		String header[] = {"íšŒì°¨", "ì‹œê°„", "ê²°ê³¼"};	
 		
-		// DB·Î ºÎÅÍ °ÔÀÓ ±â·ÏÀ» ºÒ·¯¿Â´Ù.
+		// DBë¡œ ë¶€í„° ê²Œì„ ê¸°ë¡ì„ ë¶ˆëŸ¬ì˜¨ë‹¤.
 		sDb.gameRecord();
 		
 		JTable t = new JTable(contents, header);
